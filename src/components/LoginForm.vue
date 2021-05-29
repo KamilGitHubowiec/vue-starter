@@ -22,7 +22,7 @@ export default {
 
   methods: {
     enter() {
-      this.$emit('login', this.email);
+      this.$emit('login', {email: this.email, isLoggedIn: true});
     }
   },
 

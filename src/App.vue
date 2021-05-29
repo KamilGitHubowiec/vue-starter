@@ -1,23 +1,20 @@
 <template>
   <div>
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
-    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)" ></login-form>
-    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)" button-label="Wleć"></login-form>
-    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
-    <div v-if="isLoggedIn === true">
-      <h2>Witaj {{ email }}</h2>
-      <button @click="logUserOut()">Wyloguj</button>
-    </div>
+    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)"></login-form>
+    <logged-in-view v-if="isLoggedIn === true" @logout="logUserOut($event)" :user-email="email"></logged-in-view>
   </div>
 </template>
 
 <script>
 import "milligram";
 import LoginForm from "./components/LoginForm";
+import LoggedInView from './components/LoggedInView.vue';
 
 export default {
   components: {
-    LoginForm
+    LoginForm,
+    LoggedInView
   },
 
   data() {
@@ -28,13 +25,13 @@ export default {
   },
 
   methods: {
-    logUserIn(email) {
+    logUserIn({email, isLoggedIn}) {
       this.email = email,
-      this.isLoggedIn = true
+      this.isLoggedIn = isLoggedIn
     },
-    logUserOut() {
+    logUserOut({isLoggedIn}) {
       this.email = '',
-      this.isLoggedIn = false
+      this.isLoggedIn = isLoggedIn
     }
   }
 }
