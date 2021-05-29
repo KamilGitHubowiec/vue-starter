@@ -2,7 +2,7 @@
   <form @submit="enter()">
     <label>Zaloguj się e-mailem</label>
     <input type="email" v-model="email">
-    <button type="submit">{{ buttonLabel }}</button>
+    <button type="submit">{{ buttonLabelToDisplay }}</button>
     <div v-if="email.length < 10">Ale masz krótki adres!</div>
     <div v-else-if="email.length < 15">Twój adres e-mail jest w sam raz.</div>
     <div v-else>Za długi adres email!</div>
@@ -26,9 +26,15 @@ export default {
     }
   },
 
-  mounted() {
-    if (!this.buttonLabel) {
-      this.buttonLabel = 'Zaloguj się';
+  // mounted() {
+  //   if (!this.buttonLabel) {
+  //     this.buttonLabel = 'Zaloguj się';
+  //   }
+  // },
+
+  computed: {
+    buttonLabelToDisplay() {
+      return this.buttonLabel || 'Zaloguj się';  
     }
   }
 }
