@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>Witaj w systemie do zapisów na zajęcia</h1>
-      <login-form v-if="isLoggedIn === false" @login="logUserIn($event)"></login-form>
+    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)" button-label="Wejdź"></login-form>
+    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)" button-label="Wleć"></login-form>
+    <login-form v-if="isLoggedIn === false" @login="logUserIn($event)" :button-label="Math.random() < 0.5 ? 'Etykieta A' : 'Etykieta B'"></login-form>
     <div v-if="isLoggedIn === true">
       <h2>Witaj {{ email }}</h2>
       <button @click="logUserOut()">Wyloguj</button>

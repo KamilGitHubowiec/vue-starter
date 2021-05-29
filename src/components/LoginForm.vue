@@ -2,7 +2,7 @@
   <form @submit="enter()">
     <label>Zaloguj się e-mailem</label>
     <input type="email" v-model="email">
-    <button type="submit">Wchodzę</button>
+    <button type="submit">{{ buttonLabel }}</button>
     <div v-if="email.length < 10">Ale masz krótki adres!</div>
     <div v-else-if="email.length < 15">Twój adres e-mail jest w sam raz.</div>
     <div v-else>Za długi adres email!</div>
@@ -11,15 +11,19 @@
 
 <script>
 export default {
+  props: ['buttonLabel'],
+
   data() {
     return {
-      email: ''
+      email: '',
+      buttonLabel: this.buttonLabel
     }
   },
+
   methods: {
     enter() {
       this.$emit('login', this.email);
     }
-  }
+  },
 }
 </script>
